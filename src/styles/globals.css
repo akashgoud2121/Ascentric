@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 36 30% 98%;
+    --foreground: 20 15% 12%;
+
+    --muted: 36 20% 94%;
+    --muted-foreground: 20 10% 45%;
+
+    --accent: 36 50% 90%;
+    --accent-foreground: 20 15% 12%;
+
+    --primary: 20 15% 12%;
+    --primary-foreground: 36 30% 98%;
+
+    --secondary: 36 20% 94%;
+    --secondary-foreground: 20 15% 12%;
+
+    --border: 20 10% 90%;
+    --input: 20 10% 90%;
+    --ring: 20 15% 12%;
+
+    --radius: 1.5rem;
+  }
+
+  .dark {
+    --background: 20 15% 5%;
+    --foreground: 36 30% 98%;
+
+    --primary: 36 50% 90%;
+    --primary-foreground: 20 15% 5%;
+
+    --border: 20 15% 15%;
+    --input: 20 15% 15%;
+    --ring: 36 50% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border transition-colors duration-300;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+  }
+}
+
+/* Noise Texture Overlay */
+.noise-overlay {
+  @apply fixed inset-0 pointer-events-none opacity-[0.03] grayscale contrast-150 z-[9999];
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Glassmorphism - Refractive "Liquid" Upgrade */
+.glass {
+  @apply bg-background/40 backdrop-blur-3xl border border-foreground/[0.08] shadow-[0_4px_32px_rgba(20,15,12,0.02),inset_0_1px_1px_rgba(255,255,255,0.4)];
+}
+
+.dark .glass {
+  @apply bg-white/[0.03] backdrop-blur-3xl border border-white/5;
+}
+
+/* Animated Mesh Blob Helper */
+.mesh-blob {
+  @apply absolute rounded-full blur-[120px] mix-blend-multiply opacity-30 animate-pulse;
+}
+
+/* Custom Scrollbar - Minimal High-Craft */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-foreground/5 rounded-full hover:bg-foreground/10 transition-all;
+}
+
+/* Typography Enhancements */
+h1, h2, h3 {
+  @apply tracking-tighter;
+  font-kerning: normal;
+}
+
+::selection {
+  @apply bg-foreground/10 text-foreground;
+}
+
+/* Smooth Scroll Helper */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
