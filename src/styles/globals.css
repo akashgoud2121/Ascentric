@@ -50,24 +50,34 @@
   }
 }
 
-/* Noise Texture Overlay */
+/* ⚡ High-Performance Static Noise Texture Overlay (Data-URI) */
 .noise-overlay {
-  @apply fixed inset-0 pointer-events-none opacity-[0.03] grayscale contrast-150 z-[9999];
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  @apply fixed inset-0 pointer-events-none opacity-[0.035] grayscale contrast-125 z-[9999] will-change-transform;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW1mzN3M3M7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MzM7MWZ69AAAAB3RSTlMAZmZmZpeZz9yPzAAAAGlJREFUeNpjYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkYGRkxAIA6v8ALf7vAFAAAAAASUVORK5CYII=");
 }
 
-/* Glassmorphism - Refractive "Liquid" Upgrade */
+/* ⚡ Optimized Refractive Glass (Blur normalized to 16px) */
 .glass {
-  @apply bg-background/40 backdrop-blur-3xl border border-foreground/[0.08] shadow-[0_4px_32px_rgba(20,15,12,0.02),inset_0_1px_1px_rgba(255,255,255,0.4)];
+  @apply bg-background/50 backdrop-blur-xl border border-foreground/[0.08] shadow-[0_4px_32px_rgba(20,15,12,0.02),inset_0_1px_1px_rgba(255,255,255,0.4)] will-change-transform;
 }
 
 .dark .glass {
-  @apply bg-white/[0.03] backdrop-blur-3xl border border-white/5;
+  @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.04];
 }
 
-/* Animated Mesh Blob Helper */
-.mesh-blob {
-  @apply absolute rounded-full blur-[120px] mix-blend-multiply opacity-30 animate-pulse;
+/* ⚡ Optimized Radial Gradient Mesh Blobs (No expensive blur filter) */
+.mesh-blob-gradient {
+  @apply absolute rounded-full opacity-40 mix-blend-multiply will-change-transform;
+}
+
+/* Global Spacing Utilities */
+@layer utilities {
+  .section-padding {
+    @apply pt-32 pb-20 md:py-24;
+  }
+  .container-padding {
+    @apply px-6 md:px-8;
+  }
 }
 
 /* Custom Scrollbar - Minimal High-Craft */

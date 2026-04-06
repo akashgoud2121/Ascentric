@@ -26,8 +26,8 @@ const STEPS = [
 
 export default function Process() {
   return (
-    <section id="process" className="py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="process" className="section-padding relative overflow-hidden">
+      <div className="max-w-7xl mx-auto container-padding">
         <div className="mb-20">
           <motion.h2
             initial={{ opacity: 0, x: -20 }}

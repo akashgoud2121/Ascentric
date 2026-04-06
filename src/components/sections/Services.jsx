@@ -42,8 +42,8 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="services" className="section-padding relative overflow-hidden">
+      <div className="max-w-7xl mx-auto container-padding">
         <div className="mb-20 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -78,7 +78,7 @@ function ServiceCard({ service, index }) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -10 }}
-      className="glass group relative p-10 rounded-[3rem] border-foreground/5 transition-all duration-500 overflow-hidden"
+      className="glass group relative p-6 md:p-10 rounded-[3rem] border-foreground/5 transition-all duration-500 overflow-hidden"
     >
       {/* Background Gradient Hover */}
       <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />

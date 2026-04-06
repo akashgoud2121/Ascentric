@@ -30,8 +30,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-accent/5">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="contact" className="section-padding relative overflow-hidden bg-accent/5">
+      <div className="max-w-7xl mx-auto container-padding grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Info Column */}
         <div>
           <motion.h2
@@ -60,7 +60,7 @@ export default function Contact() {
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="glass p-10 rounded-[3rem] border-foreground/5 bg-foreground/[0.02] relative shadow-2xl"
+          className="glass p-6 md:p-10 rounded-[3rem] border-foreground/5 bg-foreground/[0.02] relative shadow-2xl"
         >
           <AnimatePresence mode="wait">
             {status === "success" ? (

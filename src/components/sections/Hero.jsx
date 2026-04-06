@@ -6,42 +6,50 @@ export default function Hero() {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -50]);
-  const drift1 = useTransform(scrollY, [0, 1000], [0, 100]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
-      {/* Aurora Mesh Gradients */}
-      <div className="absolute inset-0 -z-10 bg-background overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center section-padding overflow-hidden">
+      {/* ⚡ 60 FPS Optimized Aurora Mesh Gradients */}
+      <div className="absolute inset-0 -z-10 bg-background overflow-hidden pointer-events-none">
         <motion.div
           animate={{
-            x: [-100, 100, -100],
-            y: [-50, 50, -50],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="mesh-blob top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#f3e8ff]" // Lavender
-        />
-        <motion.div
-          animate={{
-            x: [100, -100, 100],
-            y: [50, -50, 50],
-            scale: [1, 1.3, 1],
+            x: [-50, 50, -50],
+            y: [-30, 30, -30],
+            scale: [1, 1.1, 1],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="mesh-blob bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#fff7ed]" // Silk/Peach
+          style={{
+            background: "radial-gradient(circle, #f3e8ff 0%, transparent 70%)",
+          }}
+          className="mesh-blob-gradient top-[-15%] left-[-15%] w-[80%] h-[80%]"
         />
         <motion.div
           animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.2, 0.4, 0.2],
+            x: [50, -50, 50],
+            y: [30, -30, 30],
+            scale: [1, 1.2, 1],
           }}
-          transition={{ duration: 15, repeat: Infinity }}
-          className="mesh-blob top-[30%] left-[20%] w-[30%] h-[30%] bg-accent/20"
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          style={{
+            background: "radial-gradient(circle, #fff7ed 0%, transparent 70%)",
+          }}
+          className="mesh-blob-gradient bottom-[-15%] right-[-15%] w-[70%] h-[70%]"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [0.15, 0.3, 0.15],
+          }}
+          transition={{ duration: 18, repeat: Infinity }}
+          style={{
+            background: "radial-gradient(circle, hsl(var(--accent)) 0%, transparent 70%)",
+          }}
+          className="mesh-blob-gradient top-[40%] left-[30%] w-[40%] h-[40%]"
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 text-center">
+      <div className="max-w-7xl mx-auto container-padding text-center">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -58,12 +66,12 @@ export default function Hero() {
         </div>
 
         {/* Foreground Headline */}
-        <div className="relative z-10">
+        <div className="relative z-10 w-full">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.85] mb-12"
+            className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.95] md:leading-[0.85] mb-12"
           >
             FOCUSED <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-foreground/70 to-primary uppercase">

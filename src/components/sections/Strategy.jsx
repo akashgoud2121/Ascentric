@@ -30,8 +30,8 @@ const STRATEGIES = [
 
 export default function Strategy() {
   return (
-    <section id="strategy" className="py-24 bg-accent/5 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="strategy" className="section-padding bg-accent/5 overflow-hidden">
+      <div className="max-w-7xl mx-auto container-padding">
         <div className="mb-20 text-center lg:text-left flex flex-col lg:flex-row items-end justify-between gap-10">
           <div className="max-w-2xl">
             <motion.h2
@@ -68,7 +68,7 @@ function StrategyCard({ item, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="glass p-10 rounded-[2.5rem] group border-foreground/5 relative overflow-hidden transition-all duration-500 hover:bg-primary/[0.03]"
+      className="glass p-6 md:p-10 rounded-[2.5rem] group border-foreground/5 relative overflow-hidden transition-all duration-500 hover:bg-primary/[0.03]"
     >
       <div className="relative z-10 flex flex-col h-full">
         <div className="mb-10 flex items-center justify-between">

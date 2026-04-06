@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 import { cn } from "../../lib/utils";
 
 export default function Button({
@@ -10,6 +10,7 @@ export default function Button({
   ...props
 }) {
   const ref = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
   
   // Magnetic effect values
   const mouseX = useMotionValue(0);
@@ -17,8 +18,19 @@ export default function Button({
   
   const springX = useSpring(mouseX, { stiffness: 150, damping: 15 });
   const springY = useSpring(mouseY, { stiffness: 150, damping: 15 });
+
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsMobile(window.matchMedia("(pointer: coarse)").matches);
+    };
+    checkTouch();
+    window.addEventListener("resize", checkTouch);
+    return () => window.removeEventListener("resize", checkTouch);
+  }, []);
   
   const handleMouseMove = (e) => {
+    if (isMobile) return;
+
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     
@@ -54,11 +66,11 @@ export default function Button({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        x: springX,
-        y: springY,
+        x: !isMobile ? springX : 0,
+        y: !isMobile ? springY : 0,
       }}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: isMobile ? 1 : 1.02 }}
+      whileTap={{ scale: 0.96 }}
       className={cn(
         "relative rounded-2xl transition-shadow duration-300 active:scale-95 disabled:opacity-50",
         variants[variant],
@@ -73,7 +85,7 @@ export default function Button({
       
       {/* Shine effect for primary */}
       {variant === "primary" && (
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/10 to-transparent pointer-events-none opacity-50" />
       )}
     </motion.button>
   );
