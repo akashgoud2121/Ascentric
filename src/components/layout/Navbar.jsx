@@ -49,7 +49,7 @@ export default function Navbar() {
           className="relative z-[60] text-2xl font-black tracking-tighter"
         >
           <span className="text-primary italic">as</span>
-          <span className="hidden sm:inline text-foreground/80 lowercase">centric</span>
+          <span className="text-foreground/80 lowercase">centric</span>
         </motion.a>
 
         {/* Desktop Links */}
