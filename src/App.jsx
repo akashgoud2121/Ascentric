@@ -37,7 +37,7 @@ function App() {
               
               <div className="flex gap-10 text-sm font-bold text-foreground/20 mb-12">
                 <a href="#services" className="hover:text-primary transition-colors">Services</a>
-                <a href="#process" className="hover:text-primary transition-colors">Work</a>
+                <a href="#workflow" className="hover:text-primary transition-colors">Workflow</a>
                 <a href="#strategy" className="hover:text-primary transition-colors">Strategy</a>
                 <a href="#contact" className="hover:text-primary transition-colors">Hire Us</a>
               </div>

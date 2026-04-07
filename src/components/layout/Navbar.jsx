@@ -7,9 +7,8 @@ import { cn } from "../../lib/utils";
 
 const NAV_LINKS = [
   { name: "Services", href: "#services" },
-  { name: "Process", href: "#process" },
   { name: "Strategy", href: "#strategy" },
-  { name: "Portfolio", href: "#portfolio" },
+  { name: "Workflow", href: "#workflow" },
 ];
 
 export default function Navbar() {
@@ -37,45 +36,47 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-4 md:px-8",
-        isScrolled ? "py-4" : "py-8"
+        isScrolled ? "py-4 bg-background/80 backdrop-blur-md border-b border-white/[0.05]" : "py-8"
       )}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-10">
+      <div className="max-w-7xl mx-auto flex items-center justify-between relative h-12">
         {/* Logo */}
         <motion.a
           href="#"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="relative z-[60] text-2xl font-black tracking-tighter"
+          className="relative z-10 text-2xl font-black tracking-tighter"
         >
           <span className="text-primary italic">as</span>
           <span className="text-foreground/80 lowercase">centric</span>
         </motion.a>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex flex-1 items-center justify-center gap-10 glass rounded-full px-8 py-3 max-w-fit mx-auto border-foreground/[0.05] bg-background/20 backdrop-blur-md">
-          {NAV_LINKS.map((link) => (
-            <motion.a
-              key={link.name}
-              href={link.href}
-              whileHover={{ scale: 1.05 }}
-              className="text-sm font-bold hover:text-primary transition-colors duration-300"
-            >
-              {link.name}
-            </motion.a>
-          ))}
+        {/* Desktop Links - Perfectly Centered */}
+        <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="flex items-center gap-10 glass rounded-full px-10 py-3 border border-white/[0.05] bg-white/[0.02] shadow-[0_8px_32px_rgba(0,0,0,0.15)]">
+            {NAV_LINKS.map((link) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                whileHover={{ scale: 1.05, y: -1 }}
+                className="text-xs font-black hover:text-primary transition-all duration-300 uppercase tracking-[0.15em]"
+              >
+                {link.name}
+              </motion.a>
+            ))}
+          </div>
         </div>
 
         {/* CTA & Theme */}
-        <div className="relative z-[60] flex items-center gap-4">
+        <div className="relative z-10 flex items-center gap-4">
           <ThemeToggle />
           
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="hidden md:block"
+            className="hidden sm:block"
           >
-            <Button variant="primary" size="sm" className="flex items-center gap-2 group h-12">
+            <Button variant="primary" size="sm" className="flex items-center gap-2 group h-12 px-6 text-xs uppercase tracking-widest font-black">
               <Mail className="w-4 h-4 group-hover:animate-bounce" />
               Get in Touch
             </Button>
@@ -100,6 +101,13 @@ export default function Navbar() {
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             className="fixed inset-0 z-[55] bg-background/95 flex flex-col items-center justify-center gap-8 md:hidden"
           >
+             <button 
+               onClick={() => setMobileMenuOpen(false)}
+               className="absolute top-10 right-10 p-4 rounded-full glass"
+            >
+               <X className="w-8 h-8" />
+            </button>
+
             {NAV_LINKS.map((link, i) => (
               <motion.a
                 key={link.name}
@@ -118,7 +126,7 @@ export default function Navbar() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="w-full px-12 mt-8"
+              className="w-full px-12 mt-8 max-w-sm text-center"
             >
               <Button 
                 variant="primary" 
@@ -126,7 +134,7 @@ export default function Navbar() {
                 className="w-full h-20 text-xl font-black uppercase tracking-widest"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Get in Touch
+                Hire Us
               </Button>
             </motion.div>
           </motion.div>

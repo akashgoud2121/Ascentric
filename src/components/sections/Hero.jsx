@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronRight } from "lucide-react";
 import Button from "../ui/Button";
 
 export default function Hero() {
@@ -9,72 +9,28 @@ export default function Hero() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center section-padding overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center section-padding overflow-hidden bg-[#0A0A0B]">
       {/* ⚡ 60 FPS Optimized Aurora Mesh Gradients */}
       <div className="absolute inset-0 -z-10 bg-background overflow-hidden pointer-events-none">
         <motion.div
-          animate={{
-            x: [-50, 50, -50],
-            y: [-30, 30, -30],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          style={{
-            background: "radial-gradient(circle, #f3e8ff 0%, transparent 70%)",
-          }}
-          className="mesh-blob-gradient top-[-15%] left-[-15%] w-[80%] h-[80%]"
-        />
-        <motion.div
-          animate={{
-            x: [50, -50, 50],
-            y: [30, -30, 30],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          style={{
-            background: "radial-gradient(circle, #fff7ed 0%, transparent 70%)",
-          }}
-          className="mesh-blob-gradient bottom-[-15%] right-[-15%] w-[70%] h-[70%]"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.4, 1],
-            opacity: [0.15, 0.3, 0.15],
-          }}
-          transition={{ duration: 18, repeat: Infinity }}
-          style={{
-            background: "radial-gradient(circle, hsl(var(--accent)) 0%, transparent 70%)",
-          }}
+// ... (lines 15-49)
           className="mesh-blob-gradient top-[40%] left-[30%] w-[40%] h-[40%]"
         />
       </div>
 
       <div className="max-w-7xl mx-auto container-padding text-center">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 glass px-6 py-2.5 rounded-full mb-10 text-sm font-bold tracking-tight"
-        >
-          <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-foreground/80">Available for new projects</span>
-        </motion.div>
 
-        {/* Subtle Vertical Divider */}
-        <div className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none select-none">
-          <div className="w-px h-full bg-gradient-to-b from-transparent via-foreground/5 to-transparent" />
-        </div>
 
         {/* Foreground Headline */}
-        <div className="relative z-10 w-full">
+        <div className="relative z-10 w-full mb-6">
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.95] md:leading-[0.85] mb-12"
+            className="text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.9] mb-8 uppercase"
           >
             FOCUSED <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-foreground/70 to-primary uppercase">
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-primary via-primary/80 to-foreground/20">
               ON GROWTH
             </span>
           </motion.h1>
@@ -84,10 +40,14 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
             style={{ opacity }}
-            className="max-w-2xl mx-auto text-lg md:text-xl text-foreground/60 mb-14 font-medium leading-relaxed"
+            className="max-w-xl mx-auto text-sm md:text-base text-foreground/50 mb-10 font-medium leading-relaxed tracking-wide flex flex-wrap items-center justify-center gap-1"
           >
             We are a growth-first agency dedicated to elevating your digital presence. 
-            Ascent + Centric — our mission is your unmatched success.
+            <span className="inline-flex items-center gap-1 mx-1 text-foreground font-black group cursor-default">
+              Ascent + Centric 
+              <ArrowUpRight className="w-3.5 h-3.5 text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </span>
+            our mission is your unmatched success.
           </motion.p>
         </div>
 
@@ -96,14 +56,28 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6"
+          className="flex flex-col sm:flex-row items-center justify-center gap-5"
         >
-          <Button variant="primary" size="lg" className="w-full sm:w-auto h-16 group px-10">
-            Start Your Project
-            <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+          <Button 
+            variant="primary" 
+            size="lg" 
+            className="w-full sm:w-auto h-16 group px-10 relative overflow-hidden shimmer"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+               Start Your Project
+               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </span>
           </Button>
-          <Button variant="glass" size="lg" className="w-full sm:w-auto h-16 px-10">
-            View Case Studies
+          
+          <Button 
+            variant="glass" 
+            size="lg" 
+            className="w-full sm:w-auto h-16 px-10 group bg-white/[0.02] border-white/10 hover:bg-white/[0.05]"
+          >
+             <span className="flex items-center gap-2">
+                View Case Studies
+                <ChevronRight className="w-4 h-4 text-foreground/40 transition-all group-hover:translate-x-1 group-hover:text-foreground" />
+             </span>
           </Button>
         </motion.div>
 

@@ -26,7 +26,7 @@ const STEPS = [
 
 export default function Process() {
   return (
-    <section id="process" className="section-padding relative overflow-hidden">
+    <section id="workflow" className="section-padding relative overflow-hidden">
       <div className="max-w-7xl mx-auto container-padding">
         <div className="mb-20">
           <motion.h2
