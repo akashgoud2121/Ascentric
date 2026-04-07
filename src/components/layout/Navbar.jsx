@@ -6,6 +6,13 @@ import ThemeToggle from "../ui/ThemeToggle";
 import { useLenis } from "../animations/SmoothScroll";
 import { cn } from "../../lib/utils";
 
+const NAV_LINKS = [
+  { name: "Services", href: "#services" },
+  { name: "Strategy", href: "#strategy" },
+  { name: "Workflow", href: "#workflow" },
+  { name: "Projects", href: "#portfolio" },
+];
+
 const HamburgerIcon = ({ isOpen }) => (
   <div className="w-6 h-6 flex flex-col justify-center items-center gap-1.5 relative">
     <motion.span
