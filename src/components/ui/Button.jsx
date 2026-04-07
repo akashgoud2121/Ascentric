@@ -7,6 +7,7 @@ export default function Button({
   className,
   variant = "primary",
   size = "md",
+  as: Component = "button",
   ...props
 }) {
   const ref = useRef(null);
@@ -60,8 +61,10 @@ export default function Button({
     lg: "px-10 py-5 text-lg font-bold",
   };
 
+  const MotionComponent = motion[Component] || motion.button;
+
   return (
-    <motion.button
+    <MotionComponent
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -87,6 +90,6 @@ export default function Button({
       {variant === "primary" && (
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/10 to-transparent pointer-events-none opacity-50" />
       )}
-    </motion.button>
+    </MotionComponent>
   );
 }

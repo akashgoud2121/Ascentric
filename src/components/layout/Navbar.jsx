@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { name: "Services", href: "#services" },
   { name: "Strategy", href: "#strategy" },
   { name: "Workflow", href: "#workflow" },
+  { name: "Projects", href: "#portfolio" },
 ];
 
 export default function Navbar() {
@@ -36,7 +37,7 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-4 md:px-8",
-        isScrolled ? "py-4 bg-background/80 backdrop-blur-md border-b border-white/[0.05]" : "py-8"
+        isScrolled ? "py-4 bg-background/80 backdrop-blur-md border-b border-border shadow-sm" : "py-8"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between relative h-12">
@@ -53,7 +54,7 @@ export default function Navbar() {
 
         {/* Desktop Links - Perfectly Centered */}
         <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="flex items-center gap-10 glass rounded-full px-10 py-3 border border-white/[0.05] bg-white/[0.02] shadow-[0_8px_32px_rgba(0,0,0,0.15)]">
+          <div className="flex items-center gap-10 glass rounded-full px-10 py-3 border border-border bg-background/50 shadow-lg">
             {NAV_LINKS.map((link) => (
               <motion.a
                 key={link.name}
@@ -76,8 +77,14 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             className="hidden sm:block"
           >
-            <Button variant="primary" size="sm" className="flex items-center gap-2 group h-12 px-6 text-xs uppercase tracking-widest font-black">
-              <Mail className="w-4 h-4 group-hover:animate-bounce" />
+            <Button 
+              as="a"
+              href="#contact"
+              variant="primary" 
+              size="sm" 
+              className="flex items-center gap-2 group h-12 px-6 text-xs uppercase tracking-widest font-black shimmer relative overflow-hidden"
+            >
+              <Mail className="w-4 h-4 transition-transform group-hover:scale-125" />
               Get in Touch
             </Button>
           </motion.div>

@@ -9,7 +9,7 @@ export default function Hero() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center section-padding overflow-hidden bg-[#0A0A0B]">
+    <section className="relative min-h-screen flex items-center justify-center section-padding overflow-hidden bg-background">
       {/* ⚡ 60 FPS Optimized Aurora Mesh Gradients */}
       <div className="absolute inset-0 -z-10 bg-background overflow-hidden pointer-events-none">
         <motion.div
@@ -59,12 +59,14 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-5"
         >
           <Button 
+            as="a"
+            href="#contact"
             variant="primary" 
             size="lg" 
-            className="w-full sm:w-auto h-16 group px-10 relative overflow-hidden shimmer"
+            className="w-full sm:w-auto h-16 group px-10 relative overflow-hidden shimmer font-black uppercase tracking-widest"
           >
             <span className="relative z-10 flex items-center gap-2">
-               Start Your Project
+               Get in Touch
                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </span>
           </Button>
