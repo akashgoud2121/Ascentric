@@ -6,12 +6,25 @@ import ThemeToggle from "../ui/ThemeToggle";
 import { useLenis } from "../animations/SmoothScroll";
 import { cn } from "../../lib/utils";
 
-const NAV_LINKS = [
-  { name: "Services", href: "#services" },
-  { name: "Strategy", href: "#strategy" },
-  { name: "Workflow", href: "#workflow" },
-  { name: "Projects", href: "#portfolio" },
-];
+const HamburgerIcon = ({ isOpen }) => (
+  <div className="w-6 h-6 flex flex-col justify-center items-center gap-1.5 relative">
+    <motion.span
+      animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full h-0.5 bg-foreground rounded-full"
+    />
+    <motion.span
+      animate={isOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
+       transition={{ duration: 0.3 }}
+      className="w-full h-0.5 bg-foreground rounded-full"
+    />
+    <motion.span
+      animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="w-full h-0.5 bg-foreground rounded-full"
+    />
+  </div>
+);
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,15 +73,15 @@ export default function Navbar() {
           href="#"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="relative z-10 text-2xl font-black tracking-tighter"
+          className="relative z-[70] text-2xl font-black tracking-tighter"
         >
           <span className="text-primary italic">as</span>
           <span className="text-foreground/80 lowercase">centric</span>
         </motion.a>
 
-        {/* Desktop Links - Perfectly Centered */}
+        {/* Desktop Links */}
         <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="flex items-center gap-10 glass rounded-full px-10 py-3 border border-border bg-background/50 shadow-lg">
+          <div className="flex items-center gap-10 glass rounded-full px-10 py-3 border border-border bg-background/50 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
             {NAV_LINKS.map((link) => (
               <motion.a
                 key={link.name}
@@ -83,8 +96,8 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* CTA & Theme */}
-        <div className="relative z-10 flex items-center gap-4">
+        {/* CTA & Theme - Elevated Z-Index */}
+        <div className="relative z-[70] flex items-center gap-4">
           <ThemeToggle />
           
           <motion.div
@@ -105,17 +118,17 @@ export default function Navbar() {
             </Button>
           </motion.div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Unified Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden glass p-3 rounded-full text-foreground hover:bg-foreground/5 transition-all active:scale-90"
+            className="md:hidden glass p-3 rounded-full text-foreground border-foreground/10 hover:bg-foreground/5 transition-all active:scale-90"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <HamburgerIcon isOpen={mobileMenuOpen} />
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Lower Z-Index */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -136,18 +149,8 @@ export default function Navbar() {
                 ease: "easeInOut"
               }
             }}
-            className="fixed inset-0 z-[55] bg-background/98 flex flex-col items-center justify-center md:hidden backdrop-blur-3xl"
+            className="fixed inset-0 z-[60] bg-background/98 flex flex-col items-center justify-center md:hidden backdrop-blur-3xl"
           >
-             <motion.button 
-               onClick={() => setMobileMenuOpen(false)}
-               initial={{ opacity: 0, rotate: -90 }}
-               animate={{ opacity: 1, rotate: 0 }}
-               transition={{ delay: 0.5 }}
-               className="absolute top-10 right-10 p-4 rounded-full glass border-border/50"
-            >
-               <X className="w-8 h-8" />
-            </motion.button>
-
             <motion.div 
                className="flex flex-col items-center gap-8"
                initial="closed"
