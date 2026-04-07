@@ -1,9 +1,23 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight, ChevronRight } from "lucide-react";
 import Button from "../ui/Button";
+import { useLenis } from "../animations/SmoothScroll";
 
 export default function Hero() {
   const { scrollY } = useScroll();
+  const lenis = useLenis();
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    if (lenis) {
+      lenis.scrollTo(href, {
+        duration: 2.2,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+        lock: true
+      });
+    }
+  };
+
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -50]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -64,6 +78,7 @@ export default function Hero() {
             variant="primary" 
             size="lg" 
             className="w-full sm:w-auto h-16 group px-10 relative overflow-hidden shimmer font-black uppercase tracking-widest"
+            onClick={(e) => handleNavClick(e, "#contact")}
           >
             <span className="relative z-10 flex items-center gap-2">
                Get in Touch

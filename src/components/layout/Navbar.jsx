@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Mail } from "lucide-react";
 import Button from "../ui/Button";
 import ThemeToggle from "../ui/ThemeToggle";
+import { useLenis } from "../animations/SmoothScroll";
 import { cn } from "../../lib/utils";
 
 const NAV_LINKS = [
@@ -15,6 +16,19 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const lenis = useLenis();
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    if (!lenis) return;
+    
+    lenis.scrollTo(href, {
+      duration: 2.2,
+      easing: (t) => 1 - Math.pow(1 - t, 4),
+      lock: true
+    });
+    setMobileMenuOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,6 +73,7 @@ export default function Navbar() {
               <motion.a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 whileHover={{ scale: 1.05, y: -1 }}
                 className="text-xs font-black hover:text-primary transition-all duration-300 uppercase tracking-[0.15em]"
               >
@@ -83,6 +98,7 @@ export default function Navbar() {
               variant="primary" 
               size="sm" 
               className="flex items-center gap-2 group h-12 px-6 text-xs uppercase tracking-widest font-black shimmer relative overflow-hidden"
+              onClick={(e) => handleNavClick(e, "#contact")}
             >
               <Mail className="w-4 h-4 transition-transform group-hover:scale-125" />
               Get in Touch
@@ -103,46 +119,83 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(32px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-[55] bg-background/95 flex flex-col items-center justify-center gap-8 md:hidden"
+            initial={{ opacity: 0, clipPath: "circle(0% at top right)" }}
+            animate={{ 
+              opacity: 1, 
+              clipPath: "circle(150% at top right)",
+              transition: {
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1]
+              }
+            }}
+            exit={{ 
+              opacity: 0, 
+              clipPath: "circle(0% at top right)",
+              transition: {
+                duration: 0.6,
+                ease: "easeInOut"
+              }
+            }}
+            className="fixed inset-0 z-[55] bg-background/98 flex flex-col items-center justify-center md:hidden backdrop-blur-3xl"
           >
-             <button 
+             <motion.button 
                onClick={() => setMobileMenuOpen(false)}
-               className="absolute top-10 right-10 p-4 rounded-full glass"
+               initial={{ opacity: 0, rotate: -90 }}
+               animate={{ opacity: 1, rotate: 0 }}
+               transition={{ delay: 0.5 }}
+               className="absolute top-10 right-10 p-4 rounded-full glass border-border/50"
             >
                <X className="w-8 h-8" />
-            </button>
+            </motion.button>
 
-            {NAV_LINKS.map((link, i) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-4xl font-black tracking-tight hover:text-primary transition-colors hover:italic"
-              >
-                {link.name}
-              </motion.a>
-            ))}
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="w-full px-12 mt-8 max-w-sm text-center"
+            <motion.div 
+               className="flex flex-col items-center gap-8"
+               initial="closed"
+               animate="open"
+               variants={{
+                 open: {
+                   transition: { staggerChildren: 0.1, delayChildren: 0.3 }
+                 },
+                 closed: {
+                   transition: { staggerChildren: 0.05, staggerDirection: -1 }
+                 }
+               }}
             >
-              <Button 
-                variant="primary" 
-                size="lg" 
-                className="w-full h-20 text-xl font-black uppercase tracking-widest"
-                onClick={() => setMobileMenuOpen(false)}
+              {NAV_LINKS.map((link) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  variants={{
+                    open: { opacity: 1, y: 0, filter: "blur(0px)" },
+                    closed: { opacity: 0, y: 20, filter: "blur(10px)" }
+                  }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-5xl font-black tracking-tighter hover:text-primary transition-all hover:italic text-foreground/80 hover:text-foreground"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+              
+              <motion.div
+                variants={{
+                  open: { opacity: 1, scale: 1 },
+                  closed: { opacity: 0, scale: 0.9 }
+                }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="w-full px-12 mt-12 max-w-sm text-center"
               >
-                Hire Us
-              </Button>
+                <Button 
+                  as="a"
+                  href="#contact"
+                  variant="primary" 
+                  size="lg" 
+                  className="w-full h-20 text-xl font-black uppercase tracking-widest shimmer shadow-2xl shadow-primary/20"
+                  onClick={(e) => handleNavClick(e, "#contact")}
+                >
+                  Get in Touch
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
