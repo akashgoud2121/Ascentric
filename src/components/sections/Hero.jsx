@@ -85,17 +85,6 @@ export default function Hero() {
                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </span>
           </Button>
-          
-          <Button 
-            variant="glass" 
-            size="lg" 
-            className="w-full sm:w-auto h-16 px-10 group bg-white/[0.02] border-white/10 hover:bg-white/[0.05]"
-          >
-             <span className="flex items-center gap-2">
-                View Case Studies
-                <ChevronRight className="w-4 h-4 text-foreground/40 transition-all group-hover:translate-x-1 group-hover:text-foreground" />
-             </span>
-          </Button>
         </motion.div>
 
       </div>

@@ -75,7 +75,7 @@ export default function Button({
       whileHover={{ scale: isMobile ? 1 : 1.02 }}
       whileTap={{ scale: 0.96 }}
       className={cn(
-        "relative rounded-2xl transition-shadow duration-300 active:scale-95 disabled:opacity-50",
+        "relative inline-flex items-center justify-center rounded-2xl transition-shadow duration-300 active:scale-95 disabled:opacity-50",
         variants[variant],
         sizes[size],
         className

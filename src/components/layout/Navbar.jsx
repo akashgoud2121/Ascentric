@@ -141,25 +141,24 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay - BREAKOUT: Sibling to nav, not a child! */}
+      {/* Mobile Menu Overlay - BREAKOUT Strategy */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, clipPath: "circle(0% at top right)" }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ 
               opacity: 1, 
-              clipPath: "circle(150% at top right)",
+              y: 0,
               transition: {
-                duration: 0.8,
+                duration: 0.5,
                 ease: [0.16, 1, 0.3, 1]
               }
             }}
             exit={{ 
               opacity: 0, 
-              clipPath: "circle(0% at top right)",
+              y: -10,
               transition: {
-                duration: 0.6,
-                ease: "easeInOut"
+                duration: 0.3
               }
             }}
             className="fixed inset-0 z-[10001] bg-background text-foreground flex flex-col items-center justify-center md:hidden backdrop-blur-3xl"
