@@ -122,7 +122,7 @@ export default function Navbar() {
                 href="#contact"
                 variant="primary" 
                 size="sm" 
-                className="flex items-center gap-2 group h-12 px-6 text-xs uppercase tracking-widest font-black shimmer relative overflow-hidden"
+                className="flex items-center gap-2 group py-3 px-6 text-xs uppercase tracking-widest font-black shimmer relative overflow-hidden"
                 onClick={(e) => handleNavClick(e, "#contact")}
               >
                 <Mail className="w-4 h-4 transition-transform group-hover:scale-125" />
@@ -206,7 +206,7 @@ export default function Navbar() {
                   href="#contact"
                   variant="primary" 
                   size="lg" 
-                  className="w-full h-20 text-xl font-black uppercase tracking-widest shimmer shadow-2xl shadow-primary/20"
+                  className="w-full py-8 text-xl font-black uppercase tracking-widest shimmer shadow-2xl shadow-primary/20"
                   onClick={(e) => handleNavClick(e, "#contact")}
                 >
                   Get in Touch
