@@ -68,78 +68,80 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-4 md:px-8",
-        isScrolled ? "py-4 bg-background/80 backdrop-blur-md border-b border-border shadow-sm" : "py-8"
-      )}
-    >
-      <div className="max-w-7xl mx-auto flex items-center justify-between relative h-12">
-        {/* Logo - Hide when mobile menu is open to prevent clash */}
-        <motion.a
-          href="#"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ 
-            opacity: mobileMenuOpen ? 0 : 1, 
-            x: 0,
-            pointerEvents: mobileMenuOpen ? "none" : "auto"
-          }}
-          className="relative z-[10000] text-2xl font-black tracking-tighter"
-        >
-          <span className="text-primary italic">as</span>
-          <span className="text-foreground/80 lowercase">centric</span>
-        </motion.a>
+    <>
+      <nav
+        className={cn(
+          "fixed top-0 left-0 w-full z-[10002] transition-all duration-500 py-6 px-4 md:px-8",
+          isScrolled ? "py-4 bg-background/80 backdrop-blur-md border-b border-border shadow-sm" : "py-8"
+        )}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between relative h-12">
+          {/* Logo - Hide when mobile menu is open to prevent clash */}
+          <motion.a
+            href="#"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ 
+              opacity: mobileMenuOpen ? 0 : 1, 
+              x: 0,
+              pointerEvents: mobileMenuOpen ? "none" : "auto"
+            }}
+            className="relative z-[10010] text-2xl font-black tracking-tighter"
+          >
+            <span className="text-primary italic">as</span>
+            <span className="text-foreground/80 lowercase">centric</span>
+          </motion.a>
 
-        {/* Desktop Links */}
-        <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="flex items-center gap-10 glass rounded-full px-10 py-3 border border-border bg-background/50 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
-            {NAV_LINKS.map((link) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                whileHover={{ scale: 1.05, y: -1 }}
-                className="text-xs font-black hover:text-primary transition-all duration-300 uppercase tracking-[0.15em]"
+          {/* Desktop Links */}
+          <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="flex items-center gap-10 glass rounded-full px-10 py-3 border border-border bg-background/50 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
+              {NAV_LINKS.map((link) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  whileHover={{ scale: 1.05, y: -1 }}
+                  className="text-xs font-black hover:text-primary transition-all duration-300 uppercase tracking-[0.15em]"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA & Theme - Elevated Z-Index */}
+          <div className="relative z-[10010] flex items-center gap-4">
+            <ThemeToggle />
+            
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="hidden sm:block"
+            >
+              <Button 
+                as="a"
+                href="#contact"
+                variant="primary" 
+                size="sm" 
+                className="flex items-center gap-2 group h-12 px-6 text-xs uppercase tracking-widest font-black shimmer relative overflow-hidden"
+                onClick={(e) => handleNavClick(e, "#contact")}
               >
-                {link.name}
-              </motion.a>
-            ))}
+                <Mail className="w-4 h-4 transition-transform group-hover:scale-125" />
+                Get in Touch
+              </Button>
+            </motion.div>
+
+            {/* Unified Toggle Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden glass p-3 rounded-full text-foreground border-foreground/10 hover:bg-foreground/5 transition-all active:scale-90"
+            >
+              <HamburgerIcon isOpen={mobileMenuOpen} />
+            </button>
           </div>
         </div>
+      </nav>
 
-        {/* CTA & Theme - Stay on Top */}
-        <div className="relative z-[10000] flex items-center gap-4">
-          <ThemeToggle />
-          
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="hidden sm:block"
-          >
-            <Button 
-              as="a"
-              href="#contact"
-              variant="primary" 
-              size="sm" 
-              className="flex items-center gap-2 group h-12 px-6 text-xs uppercase tracking-widest font-black shimmer relative overflow-hidden"
-              onClick={(e) => handleNavClick(e, "#contact")}
-            >
-              <Mail className="w-4 h-4 transition-transform group-hover:scale-125" />
-              Get in Touch
-            </Button>
-          </motion.div>
-
-          {/* Unified Toggle Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden glass p-3 rounded-full text-foreground border-foreground/10 hover:bg-foreground/5 transition-all active:scale-90"
-          >
-            <HamburgerIcon isOpen={mobileMenuOpen} />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu Overlay - Forced Theme Consistency & Solid Background */}
+      {/* Mobile Menu Overlay - BREAKOUT: Sibling to nav, not a child! */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -160,7 +162,7 @@ export default function Navbar() {
                 ease: "easeInOut"
               }
             }}
-            className="fixed inset-0 z-[9999] bg-background text-foreground flex flex-col items-center justify-center md:hidden backdrop-blur-3xl"
+            className="fixed inset-0 z-[10001] bg-background text-foreground flex flex-col items-center justify-center md:hidden backdrop-blur-3xl"
           >
             <motion.div 
                className="flex flex-col items-center gap-8"
@@ -214,6 +216,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }
