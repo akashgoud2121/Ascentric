@@ -31,6 +31,7 @@ export default function Footer() {
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 text-xs font-black text-foreground/30 mb-12 uppercase tracking-[0.2em]">
           <a href="#services" onClick={(e) => handleNavClick(e, "#services")} className="hover:text-primary transition-colors">Services</a>
           <a href="#workflow" onClick={(e) => handleNavClick(e, "#workflow")} className="hover:text-primary transition-colors">Workflow</a>
+          <a href="#pricing" onClick={(e) => handleNavClick(e, "#pricing")} className="hover:text-primary transition-colors uppercase tracking-[0.2em]">Pricing</a>
           <a href="#strategy" onClick={(e) => handleNavClick(e, "#strategy")} className="hover:text-primary transition-colors">Strategy</a>
           <a href="#portfolio" onClick={(e) => handleNavClick(e, "#portfolio")} className="hover:text-primary transition-colors">Projects</a>
           <a href="#advantage" onClick={(e) => handleNavClick(e, "#advantage")} className="hover:text-primary transition-colors">Why Us</a>

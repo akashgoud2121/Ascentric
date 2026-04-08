@@ -7,6 +7,7 @@ import Process from "./components/sections/Process";
 import Portfolio from "./components/sections/Portfolio";
 import Comparison from "./components/sections/Comparison";
 import Contact from "./components/sections/Contact";
+import Pricing from "./components/sections/Pricing";
 import Footer from "./components/layout/Footer";
 import { ThemeProvider } from "./context/ThemeContext";
 
@@ -23,6 +24,7 @@ function App() {
             <Services />
             <Strategy />
             <Process />
+            <Pricing />
             <Portfolio />
             <Comparison />
             <Contact />

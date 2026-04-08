@@ -103,8 +103,8 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* CTA & Theme - Elevated Z-Index */}
-        <div className="relative z-[70] flex items-center gap-4">
+        {/* CTA & Theme - Elevated Z-Index for absolute mobile menu access */}
+        <div className="relative z-[10000] flex items-center gap-4">
           <ThemeToggle />
           
           <motion.div
@@ -135,7 +135,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay - Lower Z-Index */}
+      {/* Mobile Menu Overlay - Maximum Z-Index Fix */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -156,7 +156,7 @@ export default function Navbar() {
                 ease: "easeInOut"
               }
             }}
-            className="fixed inset-0 z-[60] bg-background/98 flex flex-col items-center justify-center md:hidden backdrop-blur-3xl"
+            className="fixed inset-0 z-[9999] bg-background flex flex-col items-center justify-center md:hidden"
           >
             <motion.div 
                className="flex flex-col items-center gap-8"

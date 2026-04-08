@@ -15,6 +15,7 @@ export default function Contact() {
   const [status, setStatus] = useState("idle");
 
   const PROJECT_TYPES = [
+    "Plan 1: Essential", "Plan 2: Growth", "Plan 3: Authority",
     "Portfolio", "E-commerce", "Landing Page", "Corporate", "SaaS", "Redesign"
   ];
 
