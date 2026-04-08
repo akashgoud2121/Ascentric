@@ -75,12 +75,16 @@ export default function Navbar() {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between relative h-12">
-        {/* Logo */}
+        {/* Logo - Hide when mobile menu is open to prevent clash */}
         <motion.a
           href="#"
           initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="relative z-[70] text-2xl font-black tracking-tighter"
+          animate={{ 
+            opacity: mobileMenuOpen ? 0 : 1, 
+            x: 0,
+            pointerEvents: mobileMenuOpen ? "none" : "auto"
+          }}
+          className="relative z-[10000] text-2xl font-black tracking-tighter"
         >
           <span className="text-primary italic">as</span>
           <span className="text-foreground/80 lowercase">centric</span>
@@ -103,7 +107,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* CTA & Theme - Elevated Z-Index for absolute mobile menu access */}
+        {/* CTA & Theme - Stay on Top */}
         <div className="relative z-[10000] flex items-center gap-4">
           <ThemeToggle />
           
@@ -135,7 +139,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay - Maximum Z-Index Fix */}
+      {/* Mobile Menu Overlay - Forced Theme Consistency & Solid Background */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -156,7 +160,7 @@ export default function Navbar() {
                 ease: "easeInOut"
               }
             }}
-            className="fixed inset-0 z-[9999] bg-background flex flex-col items-center justify-center md:hidden"
+            className="fixed inset-0 z-[9999] bg-background text-foreground flex flex-col items-center justify-center md:hidden backdrop-blur-3xl"
           >
             <motion.div 
                className="flex flex-col items-center gap-8"
@@ -181,7 +185,7 @@ export default function Navbar() {
                     closed: { opacity: 0, y: 20, filter: "blur(10px)" }
                   }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-5xl font-black tracking-tighter hover:text-primary transition-all hover:italic text-foreground/80 hover:text-foreground"
+                  className="text-4xl font-black tracking-tighter hover:text-primary transition-all hover:italic text-foreground/80 hover:text-foreground"
                 >
                   {link.name}
                 </motion.a>
